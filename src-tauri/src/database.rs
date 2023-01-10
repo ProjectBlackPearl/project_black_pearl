@@ -1,5 +1,5 @@
 use crate::paths;
-use std::path::{Path, PathBuf};
+use std::path::{Path};
 use uuid::Uuid;
 
 #[derive(serde::Serialize)]
@@ -46,13 +46,12 @@ pub fn copy_image(image: &String) -> Result<std::path::PathBuf, std::io::Error> 
 
 #[tauri::command]
 pub fn save_to_db(title: String, exe_path: String, description: String, image: String) {
-    // copy the image to the images folder
+    // Copy the image to the images folder
     let image_path = if image == "None" {
         "None".to_string()
     } else {
         copy_image(&image).expect("Copying image failed").display().to_string()
     };
-    //copy_image(&image).expect("Copying image failed");
 
     // Establish a connection to the database file (library.db)
     let connection = sqlite::open(paths::get_pbp().join("library.db"))
