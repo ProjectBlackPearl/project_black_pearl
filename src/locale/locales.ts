@@ -1,51 +1,29 @@
-import portuguesePT from './lang/pt-PT.json';
-import portugueseBR from './lang/pt-BR.json';
-import englishUS from './lang/en.json';
-import germanDE from './lang/de.json';
-import esperantoEO from './lang/eo.json';
-import hungarianHU from './lang/hu.json';
-import swedishSE from './lang/se.json';
-import frenchFR from './lang/fr.json';
-import estonianEE from './lang/ee.json';
-import arabicAR from './lang/ar.json';
-import finnishFI from './lang/fi.json';
-import polishPL from './lang/pl.json';
-import croatianHR from './lang/hr.json';
-import bosnianBA from './lang/ba.json';
-import czechCZ from './lang/cz.json';
-import italianIT from './lang/it.json';
-import latvianLV from './lang/lv.json';
-import dutchNL from './lang/nl.json';
-import russianRU from './lang/ru.json';
-import serbianSR from './lang/sr.json';
-import turkishTR from './lang/tr.json';
-import romanianRO from './lang/ro.json';
-import bulgarianBG from './lang/bg.json';
-
 export default {
-	en: englishUS,
-	'pt-PT': portuguesePT,
-	'pt-BR': portugueseBR,
-	de: germanDE,
-	eo: esperantoEO,
-	hu: hungarianHU,
-	se: swedishSE,
-	fr: frenchFR,
-	ee: estonianEE,
-	ar: arabicAR,
-	fi: finnishFI,
-	pl: polishPL,
-	hr: croatianHR,
-	ba: bosnianBA,
-	cz: czechCZ,
-	it: italianIT,
-	lv: latvianLV,
-	nl: dutchNL,
-	ru: russianRU,
-	sr: serbianSR,
-	tr: turkishTR,
-	ro: romanianRO,
-	bg: bulgarianBG,
+	en: await import('./lang/en.json'),
+	'pt-PT': await import('./lang/pt-PT.json'),
+	'pt-BR': await import('./lang/pt-BR.json'),
+	es: await import('./lang/es.json'),
+	de: await import('./lang/de.json'),
+	eo: await import('./lang/eo.json'),
+	hu: await import('./lang/hu.json'),
+	se: await import('./lang/se.json'),
+	fr: await import('./lang/fr.json'),
+	ee: await import('./lang/ee.json'),
+	ar: await import('./lang/ar.json'),
+	fi: await import('./lang/fi.json'),
+	pl: await import('./lang/pl.json'),
+	hr: await import('./lang/hr.json'),
+	ba: await import('./lang/ba.json'),
+	cz: await import('./lang/cz.json'),
+	it: await import('./lang/it.json'),
+	lv: await import('./lang/lv.json'),
+	nl: await import('./lang/nl.json'),
+	ru: await import('./lang/ru.json'),
+	sr: await import('./lang/sr.json'),
+	tr: await import('./lang/tr.json'),
+	ro: await import('./lang/ro.json'),
+	vi: await import('./lang/vi.json'),
+	bg: await import('./lang/bg.json'),
 };
 
 /*
@@ -67,8 +45,8 @@ export default {
 		Sup3r: Portuguese (Portugal) translation
 		AlexanderMaxRanabel: Turkish translation
 		SoulStyle: Romanian translation
-		TeeNam:	Vietnamese translation (To be finished)
-    lyubomir501: Bulgarian translation
+		TeeNam:	Vietnamese translation
+    	lyubomir501: Bulgarian translation
 
 		Terrence Tingleberry: Proofreading those translations
 */

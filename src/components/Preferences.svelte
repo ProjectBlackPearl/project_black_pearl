@@ -1,5 +1,6 @@
 <script lang="ts">
 	import translations from '../locale/locales';
+	import names from '../locale/languages.json';
 	import { dict, locale, t } from '../locale/i18n';
 	import '../styles/Preferences.scss';
 	import {
@@ -27,8 +28,8 @@
 			<label for="select">{$t('languageText')}</label>
 			<div class="locale-settings">
 				<select bind:value="{$locale}">
-					{#each languages as lang}
-						<option value="{lang}">{lang}</option>
+					{#each languages as lang, i}
+						<option value="{lang}">{names[i]}</option>
 					{/each}
 				</select>
 			</div>

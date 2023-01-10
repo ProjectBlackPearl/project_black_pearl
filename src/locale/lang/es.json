@@ -1,0 +1,42 @@
+{
+	"homeText": "Inicio",
+	"browseText": "Navega",
+	"libraryText": "Biblioteca",
+	"downloadsText": "Descargas",
+	"prefsText": "Preferencias",
+	"loadingText": "Cargando",
+	"languageText": "Idioma",
+	"preferences": {
+		"installPlugin": "Instalar un plugin",
+		"wipeLibrary": "Borrar biblioteca",
+		"saveText": "Guardar"
+	},
+	"library": {
+		"add": "Agregar",
+		"playtime": "horas jugadas",
+		"editGame": "Modificar",
+		"deleteGame": "Borrar",
+		"run": "Ejecutar"
+	},
+	"home": {
+		"welcomeText": "Bienvenido al Proyecto Perla Negra",
+		"changelogText": "Registro de cambios: "
+	},
+	"downloads": {},
+	"browse": {
+		"selectPlugin": "Seleccione un plugin",
+		"nothingFound": "No se encontraron juegos",
+		"downloadText": "Descargar",
+		"search": "Buscar"
+	},
+	"modals": {
+		"newGame": {
+			"gameTitle": "Título",
+			"addExec": "Agregar ejecutable",
+			"none": "Ninguna",
+			"addImg": "Añadir Imagen",
+			"desc": "Descripción",
+			"done": "Hecho"
+		}
+	}
+}

@@ -1,0 +1,42 @@
+{
+	"homeText": "Home",
+	"browseText": "Lướt",
+	"libraryText": "Thư viện",
+	"downloadsText": "Tải về",
+	"prefsText": "Tuỳ chọn",
+	"loadingText": "Loading",
+	"languageText": "Ngôn ngữ",
+	"preferences": {
+		"installPlugin": "Cài đặt một plugin",
+		"wipeLibrary": "Xoá thư viện",
+		"saveText": "Lưu"
+	},
+	"library": {
+		"add": "Thêm",
+		"playtime": "giờ chơi",
+		"editGame": "Sửa",
+		"deleteGame": "Xoá",
+		"run": "Chạy"
+	},
+	"home": {
+		"welcomeText": "Chào mừng đến dự án Black Pearl",
+		"changelogText": "Log thay đổi: "
+	},
+	"downloads": {},
+	"browse": {
+		"selectPlugin": "Chọn một plugin",
+		"nothingFound": "Không thấy trò chơi nào",
+		"downloadText": "Tải về",
+		"search": "Tìm kiếm"
+	},
+	"modals": {
+		"newGame": {
+			"gameTitle": "Tên",
+			"addExec": "Thêm file executable",
+			"none": "Không có",
+			"addImg": "Thêm ảnh",
+			"desc": "Mô tả",
+			"done": "Xong"
+		}
+	}
+}
