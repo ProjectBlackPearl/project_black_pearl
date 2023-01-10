@@ -34,12 +34,12 @@
 			if (isEmpty(title)) title = 'No title';
 			if (isEmpty(description)) description = 'No description';
 			if (isEmpty(executablePath)) return;
-			if (isEmpty(imagePath))
-				imagePath = await join(
-					await appLocalDataDir(),
-					'images',
-					'Default.png'
-				);
+			if (isEmpty(imagePath)) imagePath = 'None';
+			// imagePath = await join(
+			// 	await appLocalDataDir(),
+			// 	'images',
+			// 	'Default.png'
+			// );
 
 			saveData(title, executablePath, description, imagePath);
 			close();
