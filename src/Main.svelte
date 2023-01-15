@@ -28,7 +28,6 @@
 <Router>
 	<main class="container">
 		<div class="sidenav">
-			<img src="icon.png" width="100" class="branding" alt="branding" />
 			<Link class="menu-button" to="browse">{$t('browseText')}</Link>
 			<Link class="menu-button" to="/">{$t('libraryText')}</Link>
 			<Link class="menu-button" to="prefs">{$t('prefsText')}</Link>
@@ -41,9 +40,9 @@
 			<Modal
 				styleBg="{{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}"
 				styleWindow="{{
-					backgroundColor: '#000',
-					border: '1px solid #00ff00',
-					borderRadius: '0px',
+					backgroundColor: '#080808',
+					border: '2px solid #7c4ee7',
+					borderRadius: '4px',
 					float: 'center',
 				}}"
 				closeButton="{false}"

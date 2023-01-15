@@ -7,8 +7,8 @@
 	} from '../scripts/Library';
 	import { getContext } from 'svelte';
 	import NewGame from './modals/NewGame.svelte';
-	import '../styles/Library.scss';
 	import { t } from '../locale/i18n';
+	import '../styles/Library.css';
 	import { convertFileSrc } from '@tauri-apps/api/tauri';
 
 	// Gets the open function from simple-modal context

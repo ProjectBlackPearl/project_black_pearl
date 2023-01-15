@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { invoke } from '@tauri-apps/api/tauri';
 	import { getContext } from 'svelte';
-	import './../../styles/Modal.scss';
+	import './../../styles/Modal.css';
 	import { t } from '../../locale/i18n';
 	import { saveData, editData } from '../../scripts/Library';
 

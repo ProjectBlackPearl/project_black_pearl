@@ -1,0 +1,118 @@
+.top {
+	display: flex;
+	justify-content: space-between;
+}
+
+.top > button {
+	background-color: transparent;
+    color: var(--accent-color);
+	border-color: var(--accent-color);
+	border-style: solid;
+	border-width: 2px;
+    border-radius: 4px;
+	padding: 4px 16px 4px 16px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: all 0.25s;
+}
+
+.top > button:hover {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+.search-bar {
+	background-color: transparent;
+    border-radius: 4px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: var(--accent-color);
+	color: var(--accent-color);
+	padding: 8px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	width: 50%;
+    transition: all 0.25s;
+}
+
+.search-bar:focus {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+.game-panel {
+    border-radius: 4px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: var(--accent-color);
+    margin-bottom: 8px;
+    padding: 8px;
+    transition: all 0.25s;
+}
+
+.game-text {
+    display: flex;
+}
+
+.game-text p {
+    margin-left: 16px;
+}
+
+.game-title {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.game-image {
+    transition: all 0.25s;
+}
+
+.game-desc {
+    color: var(--accent-color-darker);
+    transition: all 0.25s;
+}
+
+.buttons {
+    margin-top: 8px;
+    padding: 0px;
+}
+
+.buttons button {
+    background-color: transparent;
+    border-style: solid;
+    border-radius: 4px;
+    padding: 8px 16px;
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transition: all 0.25s;
+}
+
+.buttons button:hover {
+    background-color: var(--background-color);
+    color: var(--accent-color) !important;
+    box-shadow: 0px 0px 16px #00000055;
+}
+
+.game-image {
+    border-radius: 4px;
+}
+
+.game-panel:hover {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+.game-panel:hover .game-desc {
+    color: var(--background-color);
+}
+
+.game-panel:hover button {
+    border-color: var(--background-color);
+    color: var(--background-color);
+}
+
+.game-panel:hover .game-image {
+    box-shadow: 0px 0px 24px #00000088;
+}

@@ -1,0 +1,103 @@
+.search {
+	display: flex;
+}
+
+.search > input {
+	font-size: 1rem;
+	padding: 8px 8px 8px 8px;
+	flex-grow: 1;
+}
+
+.search > input[type='text']:focus {
+	outline-style: none;
+}
+
+.search > button {
+	margin-left: 10px;
+	padding: 8px 16px 8px 16px;
+	background-color: transparent;
+    color: var(--accent-color);
+	border-color: var(--accent-color);
+	border-style: solid;
+	border-width: 2px;
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+	cursor: pointer;
+    transition: all 0.25s;
+}
+
+.search > select {
+	margin-left: 8px;
+	background-color: var(--background-color);
+    color: var(--accent-color);
+	border-style: solid;
+	border-width: 2px;
+    border-radius: 4px;
+	border-color: var(--accent-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.search > button > i {
+	font-size: 12px;
+}
+
+.game {
+	display: block;
+	border-style: solid;
+	border-color: var(--accent-color);
+	border-width: 2px;
+    border-radius: 4px;
+	margin: 10px 0px 0px 0px;
+	padding: 0px 0px 20px 10px;
+	line-height: 10px;
+    transition: all 0.25s;
+}
+
+.game:hover {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
+
+.game:hover a {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border-color: var(--background-color);
+}
+
+.game p {
+	padding-bottom: 5px;
+	font-size: 19px;
+
+	font-weight: 700;
+}
+
+.game a {
+	text-decoration: none;
+
+	border-style: solid;
+	border-color: var(--accent-color);
+
+	color: var(--accent-color);
+	margin-bottom: 100px;
+	border-width: 2px;
+    border-radius: 4px;
+	padding: 8px 16px 8px 16px;
+    transition: all 0.25s;
+}
+
+.main {
+	padding-left: 5px;
+}
+
+.game a:hover {
+    background-color: var(--background-color);
+    color: var(--accent-color);
+    box-shadow: 0px 0px 16px #00000055;
+}
+
+button:hover {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+}
