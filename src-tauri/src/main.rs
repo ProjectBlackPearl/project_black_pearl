@@ -29,6 +29,7 @@ fn main() {
         // Invoke your commands here
         .invoke_handler(tauri::generate_handler![
             commands::handle_scraper,
+            commands::handle_bpe_scraper,
             commands::file_dialog,
             commands::image_dialog,
             commands::run_game,

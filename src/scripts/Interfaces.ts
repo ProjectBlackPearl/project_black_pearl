@@ -3,6 +3,7 @@ export interface Config {
 }
 
 export interface TempScrapers {
+	bpe_scrapers: Scraper[];
 	scrapers: Scraper[];
 }
 

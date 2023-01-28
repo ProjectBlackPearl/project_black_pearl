@@ -18,6 +18,8 @@
 		response: [],
 	};
 
+	let bpeMode: boolean = false;
+
 	const data = getScrapers();
 </script>
 
@@ -43,37 +45,76 @@
 				type="text"
 				bind:value="{inputText}"
 			/>
-			<select bind:value="{selectedScraper}" name="Plugins">
-				<option value="Select">{$t('browse.selectPlugin')}</option>
+			<label>
+				<input type="checkbox" bind:checked="{bpeMode}" />
+				BPE Mode
+			</label>
 
+			{#if bpeMode}
+				<select bind:value="{selectedScraper}" name="Plugins">
+					<option value="Select">{$t('browse.selectPlugin')}</option>
+
+					<!-- 
+						Awaits the data to be resolved
+						After that adds an option for each scraper
+					-->
+					{#await data then d}
+						{#each d.bpe_scrapers as Scrapers}
+							<option value="{Scrapers.location}"
+								>{Scrapers.name.replace(
+									/(\.exe)|(\.json)/g,
+									''
+								)}</option
+							>
+						{/each}
+					{/await}
+				</select>
 				<!-- 
-					Awaits the data to be resolved
-					After that adds an option for each scraper
+					When the button is clicked, refefine the var searchData
+					With the function displayResults
 				-->
-				{#await data then d}
-					{#each d.scrapers as Scrapers}
-						<option value="{Scrapers.location}"
-							>{Scrapers.name.replace(
-								/(\.exe)|(\.lua)/g,
-								''
-							)}</option
-						>
-					{/each}
-				{/await}
-			</select>
-			<!-- 
-				When the button is clicked, refefine the var searchData
-				With the function displayResults
-			-->
-			<button
-				type="submit"
-				on:click="{() =>
-					searchGame(selectedScraper, inputText).then(() => {
-						searchData = displayResults();
-					})}"
-			>
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</button>
+				<button
+					type="submit"
+					on:click="{() =>
+						searchGame(selectedScraper, inputText).then(() => {
+							searchData = displayResults();
+						})}"
+				>
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</button>
+			{:else}
+				<select bind:value="{selectedScraper}" name="Plugins">
+					<option value="Select">{$t('browse.selectPlugin')}</option>
+
+					<!-- 
+						Awaits the data to be resolved
+						After that adds an option for each scraper
+					-->
+					{#await data then d}
+						{#each d.scrapers as Scrapers}
+							<option value="{Scrapers.location}"
+								>{Scrapers.name.replace(
+									/(\.exe)|(\.json)/g,
+									''
+								)}</option
+							>
+						{/each}
+					{/await}
+				</select>
+				<!-- 
+					When the button is clicked, refefine the var searchData
+					With the function displayResults
+				-->
+				<button
+					type="submit"
+					on:click="{() =>
+						searchGame(selectedScraper, inputText).then(() => {
+							searchData = displayResults();
+						})}"
+				>
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</button>
+			{/if}
 		</div>
 
 		<!-- 

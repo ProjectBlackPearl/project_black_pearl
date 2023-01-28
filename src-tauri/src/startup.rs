@@ -133,6 +133,7 @@ pub fn init() {
     #[derive(serde::Serialize)]
     struct Json {
         scrapers: Vec<Scraper>,
+        bpe_scrapers: Vec<Scraper>,
     }
 
     #[derive(serde::Serialize)]
@@ -145,15 +146,26 @@ pub fn init() {
     let scan = fs::read_dir(&scraper_path).expect("Reading scrapers path failed");
 
     let mut scrapers = vec![];
+    let mut bpe_scrapers = vec![];
     for entry in scan {
         let entry = entry.unwrap();
-        scrapers.push(Scraper {
+        println!("{}", entry.file_name().to_string_lossy());
+        let expression = Scraper {
             name: entry.file_name().to_string_lossy().to_string(),
             location: entry.path().to_string_lossy().to_string(),
-        })
+        };
+        let file_name = entry.file_name().to_string_lossy().to_string();
+        if file_name.ends_with("exe") {
+            scrapers.push(expression)
+        } else if file_name.ends_with("json")  {
+            bpe_scrapers.push(expression)
+        }
     }
 
-    let json = Json { scrapers };
+    let json = Json {
+        scrapers,
+        bpe_scrapers,
+    };
     let json = serde_json::to_vec_pretty(&json).unwrap();
     file.write_all(&json).unwrap();
 

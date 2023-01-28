@@ -1,4 +1,4 @@
-use std::{fs, path, process, thread, time::Instant};
+use std::{fs, path, process, thread, time, io::Write, ops::Index};
 
 use crate::commands::logging::log;
 use execute::Execute;
@@ -10,7 +10,7 @@ pub mod logging;
 #[tauri::command]
 // This function is ran everytime a search query is made
 pub fn handle_scraper(path: String, query: String) {
-    let start_time = Instant::now();
+    let start_time = time::Instant::now();
 
     // Create a command object for the scraper chosen (The command is just its path)
     // Pass in its path, a query and the destination folder for the cache file as arguments
@@ -24,7 +24,7 @@ pub fn handle_scraper(path: String, query: String) {
     if let Some(exit_code) = command.execute().unwrap() {
         if exit_code == 0 {
             log(2, "Scraper query completed successfully");
-            let final_time = Instant::now() - start_time;
+            let final_time = time::Instant::now() - start_time;
             log(2, &format!("Took {} second(s)", final_time.as_secs()))
         } else {
             log(0, "Scraper query failed successfully");
@@ -32,6 +32,100 @@ pub fn handle_scraper(path: String, query: String) {
     } else {
         log(2, "Scraper query interrupted");
     }
+}
+
+#[derive(serde::Deserialize)]
+struct Preset {
+    base_url: String,
+    query_url: String,
+    game_page_link: Route,
+    download_link: Route,
+}
+
+#[derive(serde::Deserialize)]
+struct Route {
+    route: String,
+    index: u8
+}
+
+#[derive(serde::Serialize)]
+pub struct Response {
+    response: Vec<Game>
+}
+
+#[derive(serde::Serialize, Debug)]
+pub struct Game {
+    title: String,
+    urls: Vec<String>
+}
+
+#[tauri::command]
+pub fn handle_bpe_scraper(path: String, query: String, index: u8) {
+    println!("Starting BPE scraper search");
+    let contents = fs::read(path).expect("Reading file failed");
+    let mut deserialized: Preset =
+        serde_json::from_slice(&contents).expect("JSON deserialization failed");
+    deserialized.query_url = deserialized.query_url.replace("%BPE%", &query);
+
+    let body = reqwest::blocking::get(&deserialized.query_url)
+        .expect("GET request failed")
+        .text()
+        .expect("Failed to get response text");
+    let document = scraper::Html::parse_document(&body);
+    let selector = scraper::Selector::parse(&deserialized.game_page_link.route)
+        .expect("Failed to parse selectors");
+    let selection: Vec<scraper::ElementRef> = document.select(&selector).collect();
+
+    let mut games = vec![];
+    let mut i = 0;
+
+    for title in selection {
+        if i < 5 {
+            let link = title.value().attr("href").expect("Failed to get attribute");
+            let title = title.inner_html();
+            let mut urls = vec![];
+
+            if let Some(download) = get_download(deserialized.base_url.to_string(), link.to_string(), &deserialized) {
+                urls.push(download);
+            }
+
+            games.push(Game { title, urls });
+            i += 1;
+        }
+    }
+    println!("{:#?}", games);
+
+    fn get_download(base_url: String, mut url: String, deserialized: &Preset) -> Option<String> {
+
+        if !url.starts_with("http") || !url.starts_with("magnet") {
+            url = format!("{}{}", base_url, url)
+        }
+
+        let body = reqwest::blocking::get(url)
+            .expect("GET request failed")
+            .text()
+            .expect("Failed to get response text");
+        let document = scraper::Html::parse_document(&body);
+        let selector = scraper::Selector::parse(&deserialized.download_link.route)
+            .expect("Failed to parse selectors");
+        for download in document.select(&selector) {
+            let link = download
+                .value()
+                .attr("href")
+                .expect("Failed to get attribute");
+            if link.starts_with("magnet") || link.starts_with("http") {
+                return Some(link.to_string());
+            }
+        }
+
+        None
+    }
+
+    println!("Ending BPE scraper search");
+    let response = Response { response: games };
+    let json = serde_json::to_vec_pretty(&response).expect("JSON serialization failed");
+    let mut file = fs::File::create(crate::paths::get_pbp().join("queries").join("results.json")).expect("Failed to create file");
+    file.write_all(&json).expect("Writing JSON to file failed");
 }
 
 #[tauri::command]
@@ -62,7 +156,7 @@ pub fn install_scraper() {
         2,
         &format!(
             "Installed scraper with path {}",
-            path::Path::new(&file).display().to_string()
+            path::Path::new(&file).display()
         ),
     );
 }
@@ -111,14 +205,14 @@ pub fn image_dialog() -> String {
 #[tauri::command]
 // This function is ran everytime the user clicks "Run" on a library entry
 pub fn run_game(path: String) {
-    let start_time = Instant::now();
+    let start_time = time::Instant::now();
     let mut command = process::Command::new(path);
 
     thread::spawn(move || {
         if let Some(exit_code) = command.execute().unwrap() {
             if exit_code == 0 {
                 log(2, "Game ran successfully");
-                let final_time = Instant::now() - start_time;
+                let final_time = time::Instant::now() - start_time;
                 log(
                     2,
                     &format!("Game ran for {} second(s)", final_time.as_secs()),

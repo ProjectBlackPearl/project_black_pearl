@@ -48,6 +48,8 @@ export const searchGame = async (
 	// Invoke the rust backend for initializing the scraper when a user presses the search button
 	if (path.endsWith('.exe')) {
 		await invoke('handle_scraper', { path: path, query: query });
+	} else if (path.endsWith('.json')) {
+		await invoke('handle_bpe_scraper', { path: path, query: query });
 	}
 };
 
